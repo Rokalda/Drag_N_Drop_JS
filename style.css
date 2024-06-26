@@ -1,0 +1,115 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+
+:root{
+    background-color: aliceblue;
+    font-family: monospace;
+    font-size:32px;
+}
+
+body{
+    margin-inline: 20px;
+}
+
+#drag_box{
+    --bord-col:purple;
+    --bord-width:7px;
+    --bord-scale:1;
+    
+    position: relative;
+    background-color: white;
+    height: 300px;
+    max-width: 800px;
+   
+    margin: 20px auto;
+    color: blueviolet;
+    box-shadow: 3px 0px 7px 3px #beaac5;
+    display: grid;
+    cursor: pointer;
+    place-content: center;
+    transition: max-width 0.5s;
+
+}
+
+#drag_box svg:has(.border){
+    transition: scale 0.3s;
+    position: absolute;
+    scale: var(--bord-scale);
+
+
+}
+#drag_box .border{
+    transition: stroke-width 0.4s;
+    stroke-dasharray: 10;
+    stroke: var(--bord-col);
+  
+    stroke-width:var(--bord-width);
+}
+
+
+/* Gonna add the drg_over class in the Javascript when the user drags the file over*/
+#drag_box:hover, #drag_box.drg_over{
+--bord-col:rgb(25, 90, 202);
+--bord-scale:0.97;
+max-width: 760px;
+color:rgb(61, 174, 255);
+
+}
+
+
+#drag_box .info{
+    text-align: center;
+    font-weight: bold;
+    margin-inline: 10px;
+}
+
+#dir_input {
+	position: absolute;
+	inset: 0;
+    
+}
+
+
+#file_list_box{
+    font-size: 0.72rem;
+}
+
+#file_list_box [role=list]{
+    max-width: 900px;
+   
+}
+
+#file_list_box [role=list] li{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    padding: 7px;
+}
+
+#file_list_box [role=list] li > * {
+    flex-grow: 1;
+    text-align: center;
+    
+}
+
+#file_list_box [role=list] li .name{
+    max-width: 20ch;
+    text-wrap: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#file_list_box [role=list] li .size::after{
+content: " bytes";
+}
+
+#file_list_box [role=list] li:nth-child(odd){
+    background-color: rgb(233, 213, 213);
+}
+#file_list_box [role=list] li:nth-child(even){
+    background-color: rgb(254, 250, 250);
+}
