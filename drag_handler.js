@@ -4,7 +4,7 @@ const file_input = drag_box.querySelector("input#file_input")
 try{
 
   if(navigator.userAgentData.mobile){
-    drag_box.querySelector(".info").textContent="Browser your Files here"
+    drag_box.querySelector(".info").textContent="Browse your Files here"
   }
 }
 catch{
