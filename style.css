@@ -104,7 +104,7 @@ color:rgb(61, 174, 255);
     
 }
 #file_list_box [role=list] li .pic{
- 
+
    height: 60px;
    flex-grow: 0.2;
 }

@@ -13,6 +13,7 @@ catch{
 
 
 const def_file_icon="file_icons/file-earmark-text.svg"
+const binary_file_icon="file_icons/file-earmark-binary-fill.svg";
 const file_icon_map=new Map([
   ["image","file_icons/file-earmark-image.svg"],
   ["audio","file_icons/file-earmark-music.svg"],
@@ -26,7 +27,12 @@ const file_icon_map=new Map([
   
   ["xlsx","file_icons/file-earmark-spreadsheet.svg"],
   ["docx","file_icons/file-earmark-word-fill.svg"],
-  [],
+  ["rtf","file_icons/file-earmark-richtext-fill.svg"],
+  ["json","file_icons/json-file-icon.svg"],
+  ["exe",binary_file_icon],
+  ["bin",binary_file_icon],
+  ["dll",binary_file_icon],
+
 ])
 
 
@@ -40,16 +46,7 @@ file_input.onchange=(e)=>{
   }
 
 
-drag_box.ondragenter=(e)=>{
-    drag_box.classList.add("drg_over");
-    const drag_items=[...e.dataTransfer.items];
-
-
-    let file_cunt = drag_items.filter(di=>di.kind=="file").length;
-  
-
-     drag_box.querySelector(".info").textContent=`Dropping ${file_cunt} ${file_cunt == 1 ? "file" : "files"}...`
-}
+drag_box.ondragenter=(e)=updateonDragUi
 
 drag_box.ondragleave=()=>{
     drag_box.classList.remove("drg_over")
@@ -63,10 +60,20 @@ drag_box.ondragover=(e)=>{
 
     e.preventDefault();
     
-    drag_box.classList.add("drg_over");
+    updateonDragUi(e)
   
 }
 
+function updateonDragUi(e){
+  drag_box.classList.add("drg_over");
+  const drag_items=[...e.dataTransfer.items];
+
+
+  let file_cunt = drag_items.filter(di=>di.kind=="file").length;
+
+
+   drag_box.querySelector(".info").textContent=`Dropping ${file_cunt} ${file_cunt == 1 ? "file" : "files"}...`
+}
 
 
 drag_box.ondrop= (e)=>{
