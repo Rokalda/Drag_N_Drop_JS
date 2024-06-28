@@ -102,15 +102,14 @@ function addfiletoList(file){
 
   let icon_path="";
   if(file.type.split("/")[0]=="application"){
-    icon_path = file_icon_map.get(file.name.split(".")[1]);
+    icon_path = file_icon_map.get(file.name.split(".").pop());
   }
   else{
 icon_path =file_icon_map.get(file.type.split("/")[0]);
   }
   
 
-  let f_name =file.name.split(".")[0];
-  let f_ext=file.name.split(".")[1]
+  
   clone.querySelector(".pic").src=icon_path;
   clone.querySelector("li").title=file.name
   clone.querySelector(".name").textContent=file.name;
