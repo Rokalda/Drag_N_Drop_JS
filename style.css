@@ -29,6 +29,7 @@ body{
     color: blueviolet;
     box-shadow: 3px 0px 7px 3px #beaac5;
     display: grid;
+    
     cursor: pointer;
     place-content: center;
     transition: max-width 0.5s;
@@ -41,6 +42,12 @@ body{
     scale: var(--bord-scale);
 
 
+}
+svg.bi.bi-file-earmark-arrow-up-fill {
+    width: 100px;
+    height: 100px;
+    justify-self: center;
+    translate: 0px 30px;
 }
 #drag_box .border{
     transition: stroke-width 0.4s;
@@ -87,6 +94,7 @@ color:rgb(61, 174, 255);
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
+    align-items: center;
     padding: 7px;
 }
 
@@ -95,12 +103,21 @@ color:rgb(61, 174, 255);
     text-align: center;
     
 }
-
+#file_list_box [role=list] li .pic{
+ 
+   height: 60px;
+   flex-grow: 0.2;
+}
 #file_list_box [role=list] li .name{
     max-width: 20ch;
     text-wrap: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+#file_list_box [role=list] li .size{
+width: 100px;
+flex-grow: 0.4;
 }
 
 #file_list_box [role=list] li .size::after{

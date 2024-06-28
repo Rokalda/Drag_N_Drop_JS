@@ -1,7 +1,33 @@
 const drag_box=document.getElementById("drag_box")
 const file_input = drag_box.querySelector("input#file_input")
 
+try{
 
+  if(navigator.userAgentData.mobile){
+    drag_box.querySelector(".info").textContent="Browser your Files here"
+  }
+}
+catch{
+
+}
+
+
+const def_file_icon="file_icons/file-earmark-text.svg"
+const file_icon_map=new Map([
+  ["image","file_icons/file-earmark-image.svg"],
+  ["audio","file_icons/file-earmark-music.svg"],
+  ["video","file_icons/file-earmark-play.svg"],
+  ["",def_file_icon],
+  ["text",def_file_icon],
+
+
+  ['pdf',"file_icons/file-earmark-pdf-fill.svg"],
+  ["zip","file_icons/file-earmark-zip-fill.svg"],
+  
+  ["xlsx","file_icons/file-earmark-spreadsheet.svg"],
+  ["docx","file_icons/file-earmark-word-fill.svg"],
+  [],
+])
 
 
 drag_box.onclick=()=>{
@@ -43,20 +69,21 @@ drag_box.ondragover=(e)=>{
 
 
 
-drag_box.ondrop=(e)=>{
+drag_box.ondrop= (e)=>{
 
 e.stopPropagation()
 e.preventDefault();
 drag_box.classList.remove("drg_over")
 drag_box.querySelector(".info").textContent="Browse or Drag and Drop Your Files Here";
-console.log(e.dataTransfer);
-[...e.dataTransfer.items].forEach((item, i) => {
+
+[...e.dataTransfer.items].forEach( (item, i) => {
     // If dropped items aren't files, reject them
   
     if (item.kind === "file") {
       const file = item.getAsFile();
       const entry = item.webkitGetAsEntry();
      
+      
       addfiletoList(file);
     }
   })
@@ -65,11 +92,29 @@ console.log(e.dataTransfer);
 }
 
 
+
+
 function addfiletoList(file){
+  console.log(file)
   let file_row_template=document.getElementById("file_row")
   let clone=file_row_template.content.cloneNode(true)
+
+
+  let icon_path="";
+  if(file.type.split("/")[0]=="application"){
+    icon_path = file_icon_map.get(file.name.split(".")[1]);
+  }
+  else{
+icon_path =file_icon_map.get(file.type.split("/")[0]);
+  }
+  
+
+  let f_name =file.name.split(".")[0];
+  let f_ext=file.name.split(".")[1]
+  clone.querySelector(".pic").src=icon_path;
   clone.querySelector("li").title=file.name
   clone.querySelector(".name").textContent=file.name;
+  
   clone.querySelector(".size").textContent=file.size;
 
   let link=clone.querySelector("a")
